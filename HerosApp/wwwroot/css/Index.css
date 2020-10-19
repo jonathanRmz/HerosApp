@@ -1,0 +1,27 @@
+﻿header {
+    background-color: bisque;
+}
+
+.div-center {
+    position: fixed;
+    margin: 0;
+    top:40%;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.container {
+    position:relative;
+    width: 100%;
+    height:100%;
+}
+
+.resized-img {
+    width: 70px;
+    border-radius: 50px;
+}
+
+.table td {
+    vertical-align: middle;
+}

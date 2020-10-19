@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HerosApp.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201017234924_InitialCreate")]
+    [Migration("20201018212238_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,14 +58,11 @@ namespace HerosApp.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int?>("HeroId")
+                    b.Property<int>("HeroId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("IdHero")
+                    b.Property<int>("Rating")
                         .HasColumnType("integer");
-
-                    b.Property<double>("Rating")
-                        .HasColumnType("double precision");
 
                     b.Property<string>("UserName")
                         .HasColumnType("text");
@@ -79,9 +76,11 @@ namespace HerosApp.Migrations
 
             modelBuilder.Entity("HerosApp.Models.Score", b =>
                 {
-                    b.HasOne("HerosApp.Models.Hero", null)
+                    b.HasOne("HerosApp.Models.Hero", "Hero")
                         .WithMany("RatingsHistorical")
-                        .HasForeignKey("HeroId");
+                        .HasForeignKey("HeroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -1,5 +1,4 @@
-﻿using HerosApp.Extensions;
-using HerosApp.Models;
+﻿using HerosApp.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace HerosApp.Data
@@ -13,12 +12,5 @@ namespace HerosApp.Data
 
         public DbSet<Hero> Heros { get; set; }
         public DbSet<Score> Scores { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-
-            modelBuilder.LowercaseRelationalTableAndPropertyNames();
-        }
     }
 }

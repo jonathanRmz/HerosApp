@@ -12,6 +12,7 @@ namespace HerosApp.Models
         public string City { get; set; }
         public double Rating { get; set; }
         public string UrlPhoto { get; set; }
-        public List<Score> RatingsHistorical { get; set; }
+
+        public virtual ICollection<Score> RatingsHistorical { get; set; }
     }
 }

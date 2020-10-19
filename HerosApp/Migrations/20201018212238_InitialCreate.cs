@@ -31,11 +31,10 @@ namespace HerosApp.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    IdHero = table.Column<int>(nullable: false),
                     UserName = table.Column<string>(nullable: true),
-                    Rating = table.Column<double>(nullable: false),
+                    Rating = table.Column<int>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
-                    HeroId = table.Column<int>(nullable: true)
+                    HeroId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -45,7 +44,7 @@ namespace HerosApp.Migrations
                         column: x => x.HeroId,
                         principalTable: "Heros",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

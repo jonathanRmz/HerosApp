@@ -7,17 +7,34 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20201017234924_InitialCreate.cs" />
+    <Compile Remove="Migrations\20201017234924_InitialCreate.Designer.cs" />
     <Compile Remove="Migrations\20201018031606_AddDefaultValues.cs" />
     <Compile Remove="Migrations\20201018031606_AddDefaultValues.Designer.cs" />
+    <Compile Remove="Migrations\20201018054235_AddDefaultValues.cs" />
+    <Compile Remove="Migrations\20201018054235_AddDefaultValues.Designer.cs" />
+    <Compile Remove="Migrations\20201018054518_InitialCreate.cs" />
+    <Compile Remove="Migrations\20201018054518_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20201018054607_AddDefaultValues.cs" />
+    <Compile Remove="Migrations\20201018054607_AddDefaultValues.Designer.cs" />
+    <Compile Remove="Migrations\20201018175638_ChangesOnModels.cs" />
+    <Compile Remove="Migrations\20201018175638_ChangesOnModels.Designer.cs" />
+    <Compile Remove="Migrations\20201018203728_AddRelationships.cs" />
+    <Compile Remove="Migrations\20201018203728_AddRelationships.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="jQuery.RateIt" Version="1.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.10" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\jquery-rateit\" />
   </ItemGroup>
 
 

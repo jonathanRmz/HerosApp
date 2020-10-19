@@ -1,0 +1,105 @@
+﻿@model IEnumerable<HerosApp.Models.Hero>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="GetList">Heros</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+</header>
+
+<div class="container">
+    <main role="main" class="pb-3">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Rating)
+                </th>
+                <th>
+                    Avatar
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Age)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().City)
+                </th>
+                <th>
+                    See ratings
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <div class="rateit" data-rateit-value="@item.Rating" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+                    </td>
+                    <td>
+                        <img class="resized-img" src="@item.UrlPhoto" alt="@item.Name" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Age)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#ratingsModal_@item.Id">
+                            See all ratings
+                        </button>
+                    </td>
+                </tr>
+            }
+        </table>
+    </main>
+</div>
+
+<!-- Modals -->
+@foreach (var item in Model)
+{
+    <div class="modal fade" id="ratingsModal_@item.Id" tabindex="-1" aria-labelledby="ratingsModalModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ratings of @item.Name</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @foreach (var rating in item.RatingsHistorical.OrderByDescending(x => x.Rating))
+                    {
+                        <div class="card" style="width: 100%;">
+                            <div class="card-body">
+                                <h5 class="card-title">@rating.UserName</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">@rating.Date.ToString("dd MMM yyyy")</h6>
+                                <p class="card-text">
+                                    <div class="rateit" data-rateit-value="@rating.Rating" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+                                </p>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<footer class="border-top footer text-muted">
+    <div class="container">
+        &copy; 2020 - HerosApp
+    </div>
+</footer>

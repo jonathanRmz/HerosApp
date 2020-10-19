@@ -1,17 +1,19 @@
-﻿using HerosApp.Models;
+﻿using HerosApp.Data;
+using HerosApp.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using System.Linq;
 
 namespace HerosApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly DataContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(DataContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -19,9 +21,21 @@ namespace HerosApp.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        /// <summary>
+        /// Get the list of heros
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult GetList()
         {
-            return View();
+            var list = _context.Heros.Include("RatingsHistorical").ToList();
+
+            list.All(x => 
+            {
+                x.Rating = x.RatingsHistorical.Select(a => a.Rating).Average();
+                return true;
+            });
+
+            return View(list.OrderByDescending(x => x.Rating));
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
